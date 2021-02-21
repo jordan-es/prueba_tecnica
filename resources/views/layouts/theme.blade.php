@@ -14,6 +14,8 @@
 <link href="{{asset('css/app.css')}}" rel="stylesheet">
   <link href="{{asset('css/theme.css')}}" rel="stylesheet">
 
+     <script src="{{ asset('js/datos.js') }}" defer></script>
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -40,6 +42,7 @@
 
 @yield('navbar')
 @yield('banner')
+@yield('alert')
 @yield('body')
 @yield('footer')
 

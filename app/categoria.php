@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class categoria extends Model
 {
-       protected $primaryKey = 'cod_categoria;
+        public $incrementing = false;
+       protected $primaryKey = 'cod_categoria';
 }

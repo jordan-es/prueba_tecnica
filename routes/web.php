@@ -1,5 +1,6 @@
 <?php
-
+use App\categoria;
+use App\pelicula;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +19,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('cms', 'cmsController');
+
+Route::get('/registroPeliculas', function ()
+{
+     $categorias = categoria::all();
+  return view('admin.registroPeliculas', compact('categorias'));
+});
