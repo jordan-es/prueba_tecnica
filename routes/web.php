@@ -28,7 +28,7 @@ Route::resource('cms', 'cmsController')->middleware('auth');
 
 Route::resource('cliente', 'clienteController')->middleware('auth');
 
-
+Route::get('/registrarAlquiler', 'clienteController@store');
 
 Route::get('/registroPeliculas', function ()
 {

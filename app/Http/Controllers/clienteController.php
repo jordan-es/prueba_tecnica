@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\categoria;
 use App\pelicula;
+use App\alquiler;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 
 
@@ -20,17 +24,14 @@ class clienteController extends Controller
     public function index(Request $request)
     {
 
-    // $nombre = $request->get('buscarpor');
-      //$peliculas = pelicula::where('nombre_pelicula','like','%$nombre%')->paginate(5);
-
-    //$peliculas = pelicula::paginate(5);
 
     $buscar = $request->get('buscarpor');
     $tipo = $request->get('tipo');
+    $url = $request->all();
+    $peliculas = pelicula::buscarpor($tipo, $buscar)->paginate(6)->appends($url);
 
-            $url = $request->all();
-$peliculas = pelicula::buscarpor($tipo, $buscar)->paginate(6)->appends($url);
-      return view('index', compact('peliculas'));
+    $peli = pelicula::all();
+      return view('index', compact('peliculas','peli'));
     }
 
     /**
@@ -40,7 +41,7 @@ $peliculas = pelicula::buscarpor($tipo, $buscar)->paginate(6)->appends($url);
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -51,7 +52,11 @@ $peliculas = pelicula::buscarpor($tipo, $buscar)->paginate(6)->appends($url);
      */
     public function store(Request $request)
     {
-        //
+
+      dd($request);
+          //$alquiler = new alquiler();
+          //$idAlquiler =  substr($request->nombrePelicula, 0, 2);
+          //$alquiler->cod_alquiler =
     }
 
     /**
@@ -62,7 +67,7 @@ $peliculas = pelicula::buscarpor($tipo, $buscar)->paginate(6)->appends($url);
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -73,7 +78,25 @@ $peliculas = pelicula::buscarpor($tipo, $buscar)->paginate(6)->appends($url);
      */
     public function edit($id)
     {
-        //
+        $rolID = Auth::user()->id;
+        $rolName = Auth::user()->name;
+        $random = Str::random(2);
+
+        $idPelicula = pelicula::findOrFail($id);
+
+        $alquiler = new alquiler();
+        $idAlquiler =  strtoupper($rolID.$rolName.$random);
+
+        $alquiler->cod_alquiler = $idAlquiler;
+        $alquiler->cod_pelicula_fk = $idPelicula->cod_pelicula;
+        $alquiler->cod_users_fk = $rolID;
+        $alquiler->precio_alquiler = $idPelicula->precio_alquiler;
+        $alquiler->fecha_entrega = "2021-02-21";
+        $alquiler->save();
+
+        return redirect()->action("clienteController@index");
+
+        //dd($alquiler);
     }
 
     /**
@@ -85,7 +108,7 @@ $peliculas = pelicula::buscarpor($tipo, $buscar)->paginate(6)->appends($url);
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -96,6 +119,6 @@ $peliculas = pelicula::buscarpor($tipo, $buscar)->paginate(6)->appends($url);
      */
     public function destroy($id)
     {
-        //
+
     }
 }

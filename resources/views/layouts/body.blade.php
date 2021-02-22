@@ -16,7 +16,9 @@
 </form>
 </nav>
 
-
+<form method="POST" action="{{route('cliente.store')}}">
+  @csrf
+  	@method('PATCH')
 
 <div class="container">
 <div  class="col">
@@ -35,19 +37,21 @@
     <div class="card" style="width: 18rem; margin-left:16px; margin-top: 16px; display:{{$valor}};" >
       <!-- <img src="..." class="card-img-top" alt="..."> -->
       <div class="card-body">
-    <h5 class="card-title font-weight-bold">{{$itemP->nombre_pelicula}}</h5>
-        <p class="card-text">{{$itemP->nombre_descripcion}}</p>
+        <h5 class="card-title font-weight-bold" name="nombrePeliculaA">{{$itemP->nombre_pelicula}}</h5>
+        <p class="card-text" name="descripcionA">{{$itemP->nombre_descripcion}}</p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Año: {{$itemP->año}}</li>
-        <li class="list-group-item">Precio Alquiler: ${{$itemP->precio_alquiler}}</li>
-        <li class="list-group-item">Precio Venta: ${{$itemP->precio_venta}}</li>
+        <li class="list-group-item" name="añoA">Año: {{$itemP->año}}</li>
+        <li class="list-group-item" name="precioAlquilerA">Precio Alquiler: ${{$itemP->precio_alquiler}}</li>
+        <li class="list-group-item" name="precioVentaA">Precio Venta: ${{$itemP->precio_venta}}</li>
       </ul>
       <div class="card-body">
-        <a href="#" class="card-link font-weight-bold">Rentar</a>
+        <a href="{{route('cliente.edit', $itemP->cod_pelicula)}}">
+          <button type="button" class="btn btn-success">Rentar</button></a>
         <a href="#" class="card-link font-weight-bold">Comprar</a>
       </div>
     </div>
+
       @endforeach
         </div>
     </div>
@@ -59,7 +63,7 @@
 
 </div>
 
-
+  </form>
 
 
 

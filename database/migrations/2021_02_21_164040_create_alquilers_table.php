@@ -16,12 +16,20 @@ class CreateAlquilersTable extends Migration
         Schema::create('alquilers', function (Blueprint $table) {
       $table->string('cod_alquiler')->primary();
       $table->string('cod_pelicula_fk');
-      
+      $table->unsignedbigInteger('cod_users_fk');
+      $table->string('precio_alquiler');
+      $table->date('fecha_entrega');
+
 
       $table->foreign('cod_pelicula_fk')
            ->references('cod_pelicula')
            ->on('peliculas')
            ->onDelete('cascade');
+
+           $table->foreign('cod_users_fk')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
       $table->timestamps();
         });
     }
