@@ -1,9 +1,4 @@
 
-
-
-
-
-
 <nav class="navbar navbar-light " style="margin-left:35%">
 <form class="form-inline">
   <select name="tipo" class="form-control mr-sm-2">
@@ -14,6 +9,10 @@
   <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" aria-label="Buscar">
   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 </form>
+
+@if($user = auth()->user()->name == 'jordan')
+<a type="buttom" href="/cms" class="btn btn-primary my-2 my-sm-0" type="submit">Administrar Contenido</a>
+@endif
 </nav>
 
 <form method="POST" action="{{route('cliente.store')}}">
@@ -48,7 +47,8 @@
       <div class="card-body">
         <a href="{{route('cliente.edit', $itemP->cod_pelicula)}}">
           <button type="button" class="btn btn-success">Rentar</button></a>
-        <a href="#" class="card-link font-weight-bold">Comprar</a>
+          <a href="{{route('cliente.show', $itemP->cod_pelicula)}}">
+            <button type="button" class="btn btn-success">Comprar</button></a>
       </div>
     </div>
 

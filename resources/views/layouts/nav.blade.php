@@ -11,5 +11,4 @@
 <a class="py-2 d-none d-md-inline-block" href="#">Infantiles</a>
 <a class="py-2 d-none d-md-inline-block" href="#">Romance</a>
 <a class="py-2 d-none d-md-inline-block" href="{{route('login')}}">Login</a>
-</div>
 </nav>

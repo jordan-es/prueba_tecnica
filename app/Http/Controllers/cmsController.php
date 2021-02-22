@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\categoria;
 use App\pelicula;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class cmsController extends Controller
 {
@@ -12,10 +14,6 @@ class cmsController extends Controller
       {
           $this->middleware('auth');
       }
-
-
-
-
 
     /**
      * Display a listing of the resource.
@@ -25,7 +23,7 @@ class cmsController extends Controller
     public function index()
     {
          $categorias = categoria::all();
-         $peliculas = pelicula::orderBy('nombre_pelicula', 'desc')->get();
+         $peliculas = pelicula::orderBy('nombre_pelicula', 'asc')->get();
         return view('admin.cms', compact('peliculas'));
     }
 

@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\categoria;
 use App\pelicula;
 use App\alquiler;
+use App\compra;
 use App\User;
+use Carbon\Carbon;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -15,7 +18,17 @@ use Illuminate\Support\Str;
 class clienteController extends Controller
 {
 
+  public function __construct()
+      {
+          $this->middleware('auth');
 
+          $checkIn = User::where('name','=','jordan')->first();
+          if ($checkIn == 'jordan') {
+                return view('index');
+          }else {
+                return redirect('/');
+          }
+      }
     /**
      * Display a listing of the resource.
      *
@@ -67,7 +80,25 @@ class clienteController extends Controller
      */
     public function show($id)
     {
+      $rolID = Auth::user()->id;
+      $rolName = Auth::user()->name;
+      $random = Str::random(2);
 
+      $idPelicula = pelicula::findOrFail($id);
+
+
+
+      $compra = new compra();
+      $idCompra =  strtoupper($rolID.$rolName.$random);
+
+    //  dd($idCompra);
+      $compra->cod_compra = $idCompra;
+      $compra->cod_pelicula_fk = $idPelicula->cod_pelicula;
+      $compra->cod_users_fk = $rolID;
+      $compra->precio_compra = $idPelicula->precio_venta;
+      $compra->save();
+
+      return redirect()->action("clienteController@index");
     }
 
     /**
@@ -84,6 +115,9 @@ class clienteController extends Controller
 
         $idPelicula = pelicula::findOrFail($id);
 
+        $date = Carbon::now();
+        $endDate = $date->addDay(7);
+
         $alquiler = new alquiler();
         $idAlquiler =  strtoupper($rolID.$rolName.$random);
 
@@ -91,10 +125,18 @@ class clienteController extends Controller
         $alquiler->cod_pelicula_fk = $idPelicula->cod_pelicula;
         $alquiler->cod_users_fk = $rolID;
         $alquiler->precio_alquiler = $idPelicula->precio_alquiler;
-        $alquiler->fecha_entrega = "2021-02-21";
+        $alquiler->fecha_entrega = $endDate;
+
         $alquiler->save();
 
         return redirect()->action("clienteController@index");
+
+        //dd($alquiler);
+    }
+
+    public function edit2($id)
+    {
+
 
         //dd($alquiler);
     }
