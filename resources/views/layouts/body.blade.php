@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-light " style="margin-left:35%">
+<nav class="navbar navbar-light " >
 <form class="form-inline">
   <select name="tipo" class="form-control mr-sm-2">
           <option selected>Buscar por tipo</option>
@@ -9,19 +9,57 @@
   <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" aria-label="Buscar">
   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 </form>
+<div class="col">
+  @if($user = auth()->user()->name == 'jordan')
+  <a type="buttom" href="/cms" class="btn btn-primary " type="submit" style="margin-left:10px;">Administrar Contenido</a>
+  @endif
+
+  @if($user = auth()->user()->name != 'jordan')
+  <a type="buttom" href="/verMovimientos" class="btn btn-primary " type="submit" style="margin-right:10px;">Mis Movimientos</a>
+  @endif
+
+  @if($user = auth()->user()->name == 'jordan')
+  <a type="buttom" href="/verUsuarios" class="btn btn-primary " type="submit" style="margin-left:10px;">Ver Movimientos Usuarios</a>
+  @endif
+</div>
 
 @if($user = auth()->user()->name == 'jordan')
-<a type="buttom" href="/cms" class="btn btn-primary my-2 my-sm-0" type="submit">Administrar Contenido</a>
-@endif
+<div class="dropdown star" style="margin-right:15px;" >
+  <button  class="btn btn-secondary dropdown-toggle star" oneclick="enviarDatos()" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Exportar PDF
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="/pdfPeliculas">Reporte de Pelicula</a>
+    <a class="dropdown-item" href="/pdfUsers">Reporte de Usuarios</a>
+    <a class="dropdown-item" href="/pdfTransacciones">Reporte de Transacciones</a>
+  </div>
+</div>
 
-@if($user = auth()->user()->name != 'jordan')
-<a type="buttom" href="/verMovimientos" class="btn btn-primary my-2 my-sm-0" type="submit">Mis Movimientos</a>
-@endif
+<div class="dropdown star" style="margin-right:40px;" >
+  <button  class="btn btn-secondary dropdown-toggle star" oneclick="enviarDatos()" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Exportar Excel
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="/peliculas/export/">Reporte de Pelicula</a>
+    <a class="dropdown-item" href="/users/export/">Reporte de Usuarios</a>
+    <a class="dropdown-item" href="/alquiler/export/">Reporte de Alquiler</a>
+    <a class="dropdown-item" href="/compra/export/">Reporte de Compra</a>
+  </div>
+</div>
 
-@if($user = auth()->user()->name == 'jordan')
-<a type="buttom" href="/verUsuarios" class="btn btn-primary my-2 my-sm-0" type="submit">Ver Movimientos Usuarios</a>
+
+
+
+
 @endif
 </nav>
+
+
+
+
+
+
+
 
 <form method="POST" action="{{route('cliente.store')}}">
   @csrf
@@ -72,74 +110,3 @@
 </div>
 
   </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-  <div class="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-    <div class="my-3 py-3">
-      <h2 class="display-5">Acción</h2>
-    </div>
-    <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-        <img src="{{URL::asset('/imagenes/accion/accion1.jpg')}}" class="img-fluid rounded">
-    </div>
-  </div>
-  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-    <div class="my-3 p-3">
-      <h2 class="display-5">Aventura</h2>
-    </div>
-    <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-  </div>
-</div>
-
-<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-    <div class="my-3 p-3">
-      <h2 class="display-5">Terror</h2>
-    </div>
-    <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-  </div>
-  <div class="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-    <div class="my-3 py-3">
-      <h2 class="display-5">Suspenso</h2>
-    </div>
-    <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-  </div>
-</div>
-
-
-<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-  <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-    <div class="my-3 py-3">
-      <h2 class="display-5">Infantiles</h2>
-    </div>
-    <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-  </div>
-  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-    <div class="my-3 p-3">
-      <h2 class="display-5">Romance</h2>
-    </div>
-    <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-  </div>
-</div> -->

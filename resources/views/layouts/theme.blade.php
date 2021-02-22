@@ -11,10 +11,11 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/product/">
 
     <!-- Bootstrap core CSS -->
-<link href="{{asset('css/app.css')}}" rel="stylesheet">
+  <link href="{{asset('css/app.css')}}" rel="stylesheet">
   <link href="{{asset('css/theme.css')}}" rel="stylesheet">
 
-     <script src="{{ asset('js/datos.js') }}" defer></script>
+  <script src="{{ asset('js/datos.js') }}" defer></script>
+   <script src="{{ asset('js/app.js') }}" defer></script>
 
     <style>
       .bd-placeholder-img {

@@ -44,7 +44,14 @@ Route::get('/verUsuarios', function ()
 
 
 //Route::get('/verAlquiler', 'clienteController@verAlquiler')->name('idAlquiler');
+Route::get('/pdfPeliculas', 'pdfController@generarPDF')->middleware('auth');
+Route::get('/pdfUsers', 'pdfController@generarPDF2')->middleware('auth');
+Route::get('/pdfTransacciones', 'pdfController@generarPDF3')->middleware('auth');
 
+Route::get('users/export/', 'excelController@export');
+Route::get('peliculas/export/', 'excelController@export2');
+Route::get('compra/export/', 'excelController@export3');
+Route::get('alquiler/export/', 'excelController@export4');
 
 Route::resource('cliente', 'clienteController')->middleware('auth');
 
