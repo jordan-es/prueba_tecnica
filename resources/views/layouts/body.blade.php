@@ -13,6 +13,14 @@
 @if($user = auth()->user()->name == 'jordan')
 <a type="buttom" href="/cms" class="btn btn-primary my-2 my-sm-0" type="submit">Administrar Contenido</a>
 @endif
+
+@if($user = auth()->user()->name != 'jordan')
+<a type="buttom" href="/verMovimientos" class="btn btn-primary my-2 my-sm-0" type="submit">Mis Movimientos</a>
+@endif
+
+@if($user = auth()->user()->name == 'jordan')
+<a type="buttom" href="/verUsuarios" class="btn btn-primary my-2 my-sm-0" type="submit">Ver Movimientos Usuarios</a>
+@endif
 </nav>
 
 <form method="POST" action="{{route('cliente.store')}}">
@@ -45,10 +53,10 @@
         <li class="list-group-item" name="precioVentaA">Precio Venta: ${{$itemP->precio_venta}}</li>
       </ul>
       <div class="card-body">
-        <a href="{{route('cliente.edit', $itemP->cod_pelicula)}}">
+          <a href="{{route('cliente.edit', $itemP->cod_pelicula)}}">
           <button type="button" class="btn btn-success">Rentar</button></a>
           <a href="{{route('cliente.show', $itemP->cod_pelicula)}}">
-            <button type="button" class="btn btn-success">Comprar</button></a>
+          <button type="button" class="btn btn-success">Comprar</button></a>
       </div>
     </div>
 

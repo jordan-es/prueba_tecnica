@@ -6,7 +6,9 @@
 
   <h1>Modificar Pelicula</h1> <br>
 
-
+  <form method="POST" action="{{route('cms.update', $peliculas->cod_pelicula)}}">
+    @csrf
+    	@method('PATCH')
     <div class="form-row col-8  ">
       <div class="col-6">
         Nombre Pelicula: <input type="text" class="form-control" placeholder="Nombre" name="nombrePelicula" id="nombrePelicula"
@@ -62,7 +64,7 @@
 <div class="col-12"> <br>
      <button type="submit" class="btn btn-primary">Modificar Pelicula</button>
 </div>
- <br><br><br>
+</form> <br><br><br>
 
 
 

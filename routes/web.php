@@ -1,6 +1,8 @@
 <?php
 use App\categoria;
 use App\pelicula;
+use App\alquiler;
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,10 +28,26 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('cms', 'cmsController')->middleware('auth');
+Route::get('/verMovimientos', function ()
+{
+  $user = auth()->user()->id;
+  $alquiler = alquiler::where('cod_users_fk','=',$user)->get();
+  return view('movimientos.movimientos', compact('alquiler'));
+})->middleware('auth');
+
+Route::get('/verUsuarios', function ()
+{
+  $user = User::all();
+  //dd($user);
+  return view('movimientos.verUsuarios', compact('user'));
+})->middleware('auth');
+
+
+//Route::get('/verAlquiler', 'clienteController@verAlquiler')->name('idAlquiler');
+
 
 Route::resource('cliente', 'clienteController')->middleware('auth');
 
-//Route::get('/registrarAlquiler', 'clienteController@store');
 Route::get('/registroPeliculas', function ()
 {
   $categorias = categoria::all();

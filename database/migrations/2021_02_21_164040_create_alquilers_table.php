@@ -18,6 +18,7 @@ class CreateAlquilersTable extends Migration
       $table->string('cod_pelicula_fk');
       $table->unsignedbigInteger('cod_users_fk');
       $table->string('precio_alquiler');
+      $table->string('estado');
       $table->date('fecha_entrega');
 
 

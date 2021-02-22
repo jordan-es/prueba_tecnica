@@ -122,6 +122,7 @@ class clienteController extends Controller
         $idAlquiler =  strtoupper($rolID.$rolName.$random);
 
         $alquiler->cod_alquiler = $idAlquiler;
+        $alquiler->estado = "PENDIENTE";
         $alquiler->cod_pelicula_fk = $idPelicula->cod_pelicula;
         $alquiler->cod_users_fk = $rolID;
         $alquiler->precio_alquiler = $idPelicula->precio_alquiler;
@@ -151,6 +152,23 @@ class clienteController extends Controller
     public function update(Request $request, $id)
     {
 
+      $updateAlqui = alquiler::where('created_at','=',$id)->first();
+
+        $hoy = Carbon::now();
+
+        $entrega = $updateAlqui->fecha_entrega;
+
+        if($hoy->greaterThan($updateAlqui->fecha_entrega)){
+            $deuda='Se acumulo una multa al monto por retraso';
+          }else {
+            $deuda="";
+          }
+
+
+      $updateAlqui->estado="SOLVENTE";
+      $updateAlqui->save();
+      return redirect('/verUsuarios')->with('datos','Accion Exitosa'.$deuda);
+
     }
 
     /**
@@ -161,6 +179,7 @@ class clienteController extends Controller
      */
     public function destroy($id)
     {
-
+      $alqui = alquiler::where('cod_users_fk','=',$id)->get();
+      return view('movimientos.verAlquileres', compact('alqui'));
     }
 }

@@ -7,6 +7,7 @@ use App\categoria;
 use App\pelicula;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class cmsController extends Controller
 {
