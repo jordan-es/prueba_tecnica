@@ -25,7 +25,7 @@ class cmsController extends Controller
     public function index()
     {
          $categorias = categoria::all();
-         $peliculas = pelicula::all();
+         $peliculas = pelicula::orderBy('nombre_pelicula', 'desc')->get();
         return view('admin.cms', compact('peliculas'));
     }
 
@@ -55,6 +55,7 @@ class cmsController extends Controller
 
     $peli->cod_pelicula =$id;
         $peli->año = $request->añoPelicula;
+        $peli->disponilble = $request->disponilble;
       $peli->precio_alquiler = $request->rentaPelicula;
       $peli->precio_venta = $request->precioPelicula;
         $peli->cod_categoria_fk = $request->categoria;
@@ -110,6 +111,7 @@ class cmsController extends Controller
       //$id = $request->categoria.'-'.strtoupper($idPelicula);
       //$peli->cod_pelicula =$id;
       $buscarPelicula->año = $request->añoPelicula;
+        $buscarPelicula->disponilble = $request->disponilble;
       $buscarPelicula->precio_alquiler = $request->rentaPelicula;
       $buscarPelicula->precio_venta = $request->precioPelicula;
           $buscarPelicula->cod_categoria_fk = $request->categoria;

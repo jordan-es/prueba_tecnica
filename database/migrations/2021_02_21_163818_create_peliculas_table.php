@@ -21,6 +21,7 @@ class CreatePeliculasTable extends Migration
             $table->string('precio_venta');
             $table->string('año');
             $table->string('descripcion',200);
+            $table->string('disponilble');
           //  $table->string('disponilble',10);
 
           $table->foreign('cod_categoria_fk')

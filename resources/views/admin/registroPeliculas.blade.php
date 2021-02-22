@@ -35,6 +35,16 @@
         Año de emisión: <input type="text" class="form-control" placeholder="2020" name="añoPelicula" id="rentaPelicula">
       </div>
 
+      <div class="col-6">
+        Categoria: <select name='disponilble' id="disponilble" class="custom-select">
+						    <option disabled="true">Seleccione la categoria</option>
+
+						    <option value='Si'>Si</option>
+                <option value='No'>No</option>
+
+						</select>
+      </div>
+
       <div class="col-12">
        Descripcion: <textarea type="text" class="form-control" placeholder="Descripcion" name="descPelicula1"
        value="" id="descPelicula1"></textarea>

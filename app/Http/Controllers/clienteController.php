@@ -7,16 +7,29 @@ use App\categoria;
 use App\pelicula;
 
 
+
 class clienteController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-      $peliculas = pelicula::all();
+
+    // $nombre = $request->get('buscarpor');
+      //$peliculas = pelicula::where('nombre_pelicula','like','%$nombre%')->paginate(5);
+
+    //$peliculas = pelicula::paginate(5);
+
+    $buscar = $request->get('buscarpor');
+    $tipo = $request->get('tipo');
+
+            $url = $request->all();
+$peliculas = pelicula::buscarpor($tipo, $buscar)->paginate(6)->appends($url);
       return view('index', compact('peliculas'));
     }
 

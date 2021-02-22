@@ -12,25 +12,28 @@ use App\pelicula;
 |
 */
 
-Route::get('/', function () {
-  $peliculas = pelicula::all();
-    return view('index', compact('peliculas'));
-});
+// Route::get('/', function () {
+//   $peliculas = pelicula::all();
+//     return view('index', compact('peliculas'));
+// });
+
+
+Route::get('/', 'clienteController@index')->name('cliente');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('cms', 'cmsController');
+Route::resource('cms', 'cmsController')->middleware('auth');
 
-Route::resource('cliente', 'clienteController');
+Route::resource('cliente', 'clienteController')->middleware('auth');
 
 
 
 Route::get('/registroPeliculas', function ()
 {
-     $categorias = categoria::all();
+  $categorias = categoria::all();
   return view('admin.registroPeliculas', compact('categorias'));
-});
+})->middleware('auth');
 
-Route::get('/agenda/{id}/confirmar','cmsController@confirmar')->name('cms.confirmar');
+Route::get('/pelicula/{id}/confirmar','cmsController@confirmar')->name('cms.confirmar');

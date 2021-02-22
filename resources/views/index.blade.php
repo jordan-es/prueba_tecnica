@@ -11,6 +11,7 @@
 
 @section('body')
  @include('layouts.body')
+
 @endsection
 
 @section('body')

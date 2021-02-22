@@ -1,7 +1,61 @@
 
 
+
+
+
+
+<nav class="navbar navbar-light " style="margin-left:35%">
+<form class="form-inline">
+  <select name="tipo" class="form-control mr-sm-2">
+          <option selected>Buscar por tipo</option>
+          <option value="nombre_pelicula">Nombre</option>
+          <option value="año">Año</option>
+  </select>
+  <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" aria-label="Buscar">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+</nav>
+
+
+
 <div class="container">
-  {{$peliculas}}
+<div  class="col">
+  <div class="row">
+
+  @foreach($peliculas as $itemP)
+@php
+  if($itemP->disponilble == 'No'){
+
+  $valor = "none";
+   }else {
+  $valor = "";
+    }
+  @endphp
+
+    <div class="card" style="width: 18rem; margin-left:16px; margin-top: 16px; display:{{$valor}};" >
+      <!-- <img src="..." class="card-img-top" alt="..."> -->
+      <div class="card-body">
+    <h5 class="card-title font-weight-bold">{{$itemP->nombre_pelicula}}</h5>
+        <p class="card-text">{{$itemP->nombre_descripcion}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Año: {{$itemP->año}}</li>
+        <li class="list-group-item">Precio Alquiler: ${{$itemP->precio_alquiler}}</li>
+        <li class="list-group-item">Precio Venta: ${{$itemP->precio_venta}}</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link font-weight-bold">Rentar</a>
+        <a href="#" class="card-link font-weight-bold">Comprar</a>
+      </div>
+    </div>
+      @endforeach
+        </div>
+    </div>
+
+<div style="margin-left:35%; margin-top:16px;">
+   {{$peliculas->links() }}
+</div>
+
 
 </div>
 

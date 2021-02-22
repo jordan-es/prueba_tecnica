@@ -26,6 +26,7 @@
       <th scope="col">Precio Venta</th>
       <th scope="col">Modificar</th>
       <th scope="col">Eliminar</th>
+      <th scope="col">Diponibilidad</th>
 
     </tr>
   </thead>
@@ -43,7 +44,10 @@
 
       <td> <a href="{{route('cms.confirmar', $idPelicula->cod_pelicula)}}">
         <button type="button" class="btn btn-danger">Eliminar</button></a>  </td>
+        <td>{{$idPelicula->disponilble}}</td>
     </tr>
+
+
         @endforeach
   </tbody>
 </table>
