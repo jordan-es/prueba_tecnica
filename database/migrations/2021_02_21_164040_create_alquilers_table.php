@@ -16,6 +16,7 @@ class CreateAlquilersTable extends Migration
         Schema::create('alquilers', function (Blueprint $table) {
       $table->string('cod_alquiler')->primary();
       $table->string('cod_pelicula_fk');
+      
 
       $table->foreign('cod_pelicula_fk')
            ->references('cod_pelicula')

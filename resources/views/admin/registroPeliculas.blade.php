@@ -24,11 +24,15 @@
       </div> <br><br>
 
       <div class="col-6">
-        Precio Venta: <input type="text" class="form-control" placeholder="Aventura" name="precioPelicula" id="precioPelicula">
+        Precio Venta: <input type="text" class="form-control" placeholder="$" name="precioPelicula" id="precioPelicula">
       </div>
 
       <div class="col-6">
-        Precio Alquiler: <input type="text" class="form-control" placeholder="Aventura" name="rentaPelicula" id="rentaPelicula">
+        Precio Alquiler: <input type="text" class="form-control" placeholder="$" name="rentaPelicula" id="rentaPelicula">
+      </div>
+
+      <div class="col-6">
+        Año de emisión: <input type="text" class="form-control" placeholder="2020" name="añoPelicula" id="rentaPelicula">
       </div>
 
       <div class="col-12">

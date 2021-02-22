@@ -17,7 +17,9 @@ class CreatePeliculasTable extends Migration
           $table->string('cod_pelicula')->primary();
             $table->string('cod_categoria_fk', 100);
             $table->string('nombre_pelicula', 100);
-            $table->bigInteger('cantidad');
+            $table->string('precio_alquiler');
+            $table->string('precio_venta');
+            $table->string('año');
             $table->string('descripcion',200);
           //  $table->string('disponilble',10);
 

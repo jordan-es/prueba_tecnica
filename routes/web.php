@@ -13,7 +13,8 @@ use App\pelicula;
 */
 
 Route::get('/', function () {
-    return view('index');
+  $peliculas = pelicula::all();
+    return view('index', compact('peliculas'));
 });
 
 Auth::routes();
@@ -22,8 +23,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('cms', 'cmsController');
 
+Route::resource('cliente', 'clienteController');
+
+
+
 Route::get('/registroPeliculas', function ()
 {
      $categorias = categoria::all();
   return view('admin.registroPeliculas', compact('categorias'));
 });
+
+Route::get('/agenda/{id}/confirmar','cmsController@confirmar')->name('cms.confirmar');

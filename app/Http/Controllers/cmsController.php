@@ -54,7 +54,9 @@ class cmsController extends Controller
       $id = $request->categoria.'-'.strtoupper($idPelicula);
 
     $peli->cod_pelicula =$id;
-      $peli->cantidad = 0;
+        $peli->año = $request->añoPelicula;
+      $peli->precio_alquiler = $request->rentaPelicula;
+      $peli->precio_venta = $request->precioPelicula;
         $peli->cod_categoria_fk = $request->categoria;
           $peli->nombre_pelicula = $request->nombrePelicula;
               $peli->descripcion = $request->descPelicula1;
@@ -107,7 +109,9 @@ class cmsController extends Controller
       //$idPelicula =  substr($request->nombrePelicula, 0, 2);
       //$id = $request->categoria.'-'.strtoupper($idPelicula);
       //$peli->cod_pelicula =$id;
-        $buscarPelicula->cantidad =0 ;
+      $buscarPelicula->año = $request->añoPelicula;
+      $buscarPelicula->precio_alquiler = $request->rentaPelicula;
+      $buscarPelicula->precio_venta = $request->precioPelicula;
           $buscarPelicula->cod_categoria_fk = $request->categoria;
             $buscarPelicula->nombre_pelicula = $request->nombrePelicula;
                 $buscarPelicula->descripcion = $request->descPelicula1;
@@ -124,6 +128,15 @@ class cmsController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $peliculas = pelicula::findOrFail($id);
+         $peliculas->delete();
+         return redirect()->route('cms.index')->with('datos','Pelicula Eliminada');
     }
+
+    public function confirmar($id)
+   {
+       $categorias = categoria::all();
+       $peliculas = pelicula::findOrFail($id);
+       return view('admin.deletePeliculas', compact('peliculas','categorias'));
+   }
 }

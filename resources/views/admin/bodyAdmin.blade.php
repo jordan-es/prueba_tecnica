@@ -20,6 +20,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Nombre Pelicula</th>
+      <th scope="col">Año Emision</th>
       <th scope="col">Descripcion</th>
       <th scope="col">Precio Alquiler</th>
       <th scope="col">Precio Venta</th>
@@ -33,13 +34,15 @@
     <tr >
       <th scope="row" >{{$idPelicula->cod_pelicula}}</th>
       <td>{{$idPelicula->nombre_pelicula}}</td>
+      <td>{{$idPelicula->año}}</td>
       <td>{{$idPelicula->descripcion}}</td>
-      <td>$0.00</td>
-      <td>$0.00</td>
+      <td>{{$idPelicula->precio_alquiler}}</td>
+      <td>{{$idPelicula->precio_venta}}</td>
       <td> <a href="{{route('cms.edit', $idPelicula->cod_pelicula)}}">
         <button type="button" class="btn btn-success">Editar</button></a> </td>
 
-      <td> <button type="submit" class="btn btn-danger">Eliminar Pelicula</button> </td>
+      <td> <a href="{{route('cms.confirmar', $idPelicula->cod_pelicula)}}">
+        <button type="button" class="btn btn-danger">Eliminar</button></a>  </td>
     </tr>
         @endforeach
   </tbody>
